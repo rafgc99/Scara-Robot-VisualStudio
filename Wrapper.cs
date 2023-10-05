@@ -10,6 +10,12 @@ namespace RoboticArm
 {
     public static class Wrapper
     {
+        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern simx_error simxStartSimulation(int clientID, simx_opmode opmode);
+
+        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern simx_error simxStopSimulation(int clientID, simx_opmode opmode);
+
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)] //[DllImport("remoteApi.dll")]
         public static extern void simxFinish(int clientID);
 
@@ -55,8 +61,8 @@ namespace RoboticArm
             return "";
         }
 
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern simx_error simxGetAndClearStringSignal(int clientID, string signalName, ref IntPtr pointerToValue, ref int signalLength, simx_opmode opmode);
+      //  [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+    //    public static extern simx_error simxGetAndClearStringSignal(int clientID, string signalName, ref IntPtr pointerToValue, ref int signalLength, simx_opmode opmode);
 
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern simx_error simxGetJointPosition(int clientID, int jointHandle, ref float targetPosition, simx_opmode opmode);
@@ -73,12 +79,12 @@ namespace RoboticArm
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern simx_error simxGetObjectPosition(int clientID, int jointHandle, int relativeToHandle, float[] positions, simx_opmode opmode);
 
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern simx_error simxPauseCommunication(int cliendID, int pause);
+      //  [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+    //    public static extern simx_error simxPauseCommunication(int cliendID, int pause);
 
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public extern static simx_error simxReadProximitySensor(int clientID, int sensorHandle,
-                                                         ref char detectionState, float[] detectionPoint, ref int objectHandle, float[] normalVector, simx_opmode opmode);
+      //  [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+      //  public extern static simx_error simxReadProximitySensor(int clientID, int sensorHandle,
+               //                                          ref char detectionState, float[] detectionPoint, ref int objectHandle, float[] normalVector, simx_opmode opmode);
 
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern simx_error simxSetJointTargetPosition(int clientID, int jointHandle, float targetPosition, simx_opmode opmode);
@@ -95,21 +101,15 @@ namespace RoboticArm
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int simxStart(string ip, int port, bool waitForConnection, bool reconnectOnDisconnect, int timeoutMS, int cycleTimeMS);
 
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern simx_error simxGetUIEventButton(int clientID, int uiHandle, ref int uiEventButtonID, IntPtr aux, simx_opmode opmode);
+      //  [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+      //  public static extern simx_error simxGetUIEventButton(int clientID, int uiHandle, ref int uiEventButtonID, IntPtr aux, simx_opmode opmode);
 
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+       // [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
         // public static extern simx_error simxGetUIHandle(int clientID, string uiName, out int handle, simx_opmode opmode);
-        public static extern simx_error simxGetUIHandle(int clientID, string uiName, IntPtr p, simx_opmode opmode);
+     //   public static extern simx_error simxGetUIHandle(int clientID, string uiName, IntPtr p, simx_opmode opmode);
 
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern simx_error simxGetObjectHandle(int clientID, string objectName, out int handle, simx_opmode opmode);
-
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern simx_error simxStartSimulation(int clientID, simx_opmode opmode);
-
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern simx_error simxStopSimulation(int clientID, simx_opmode opmode);
+        public static extern simx_error simxGetObjectHandle(int clientID, string objectName, out int handle, simx_opmode opmode);       
 
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern simx_error simxSynchronousTrigger(int clientID);
@@ -126,11 +126,11 @@ namespace RoboticArm
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
         public extern static simx_error simxSetFloatSignal(int clientID, string signalName, float signalValue, simx_opmode opmode);
 
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public extern static simx_error simxReadProximitySensor(int clientID, int sensorHandle, out char detectionState, out float detectedPoint, out int detectedObjectHandle, out float detectedSurfaceNormalVector, simx_opmode opmode);
+     //   [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+    //    public extern static simx_error simxReadProximitySensor(int clientID, int sensorHandle, out char detectionState, out float detectedPoint, out int detectedObjectHandle, out float detectedSurfaceNormalVector, simx_opmode opmode);
 
-        [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
-        public extern static simx_error simxReadVisionSensor(int clientID, int sensorHandle, out char detectionState, out float auxValues, out int auxValuesCount, simx_opmode opmode);
+      //  [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
+    //    public extern static simx_error simxReadVisionSensor(int clientID, int sensorHandle, out char detectionState, out float auxValues, out int auxValuesCount, simx_opmode opmode);
 
         [DllImport("remoteApi.dll", CallingConvention = CallingConvention.Cdecl)]
         public extern static simx_error simxSetIntegerSignal(int clientID, string signalName, int signalValue, simx_opmode opmode);
