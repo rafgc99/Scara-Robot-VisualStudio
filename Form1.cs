@@ -164,18 +164,18 @@ namespace RoboticArm
         private void UpdateChart()
         {
             //define minimo e máximo do gráfico
-            chart1.ChartAreas[0].AxisX.Minimum = -0.5;
+            chart1.ChartAreas[0].AxisX.Minimum = -0.4;
             chart1.ChartAreas[0].AxisX.Maximum = 0.6;
-            chart1.ChartAreas[0].AxisY.Minimum = -0.4;
+            chart1.ChartAreas[0].AxisY.Minimum = -0.2;
             chart1.ChartAreas[0].AxisY.Maximum = 0.7;
 
             //define nivel da transparencia
-            Color Transparente = Color.FromArgb(70, Color.Orange);
+            Color Transparente = Color.FromArgb(100, Color.Orange);
 
 
             chart1.Series[1].Color = Transparente;
 
-
+           
             int maxDataPoints = 20;
 
 
@@ -194,32 +194,17 @@ namespace RoboticArm
                     chart1.Series[0].Points.RemoveAt(0);
                 }
             }
-
-
-
-
-            // Define workspace
-            var vertices = new List<DataPoint>
-            {
-                new DataPoint(0.0, 0.25),  //  Vertice 1
-                new DataPoint(0.5, 0.25),  //  Vertice 2
-                new DataPoint(0.5, 0.6),   //  Vertice 3
-               new DataPoint(0.0, 0.6)  // Vertice 4 
-                
-            };
-
-            // Adiciona vértices a segunda série no chart
-            foreach (var vertex in vertices)
-            {
-                chart1.Series[1].Points.Add(vertex);
-               
-
-            }
-
+            
+            //faz area de trabalho 
             chart1.ChartAreas[0].AxisY.Interval = 0.2;
 
             chart1.ChartAreas[0].AxisX.Interval = 0.2;
-        
+
+            chart1.Series[1].Points.AddXY(0.25, 0.25,0.6);      
+ 
+            chart1.Series[1]["PixelPointWidth"] = "85"; 
+
+     
         }
 
         // Lista para armazenar posições
@@ -1160,13 +1145,9 @@ namespace RoboticArm
                 Wrapper.simxSynchronousTrigger(clientID);
              
         }
-       
-           
+                  
         }
-
-       
-
+              
     }
-
+         
 }
-
