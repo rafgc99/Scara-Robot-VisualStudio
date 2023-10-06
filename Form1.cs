@@ -200,9 +200,9 @@ namespace RoboticArm
 
             chart1.ChartAreas[0].AxisX.Interval = 0.2;
 
-            chart1.Series[1].Points.AddXY(0.25, 0.25,0.6);      
+            chart1.Series[1].Points.AddXY(0.25,0.25,0.6);      
  
-            chart1.Series[1]["PixelPointWidth"] = "85"; 
+            chart1.Series[1]["PixelPointWidth"] = "95"; 
 
      
         }
