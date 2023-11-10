@@ -60,7 +60,7 @@ namespace RoboticArm
             textBox10.KeyDown += textBox10_KeyDown;
             textBox11.KeyDown += textBox11_KeyDown;
             button11.Click += button11_Click;
-
+          
 
             //inicia em PTP 
             radioPTP.Checked = true;
@@ -147,6 +147,7 @@ namespace RoboticArm
                 simulationRunning = false;
                 dataGridView1.Rows.Clear();
                 radioPTP.Checked = true;
+                button13.Text = "Continuous";
        
             }
 
@@ -245,8 +246,6 @@ namespace RoboticArm
             Wrapper.simxGetObjectHandle(clientID, "Vision_sensor_cima", out VisionsensorC, simx_opmode.oneshot_wait);
             Wrapper.simxGetObjectHandle(clientID, "Vision_sensor_frente", out VisionsensorF, simx_opmode.oneshot_wait);
 
-
-
             Wrapper.simxGetObjectHandle(clientID, "Junta_01", out Junta1, simx_opmode.oneshot_wait);
             Wrapper.simxGetObjectHandle(clientID, "Junta_02", out Junta2, simx_opmode.oneshot_wait);
             Wrapper.simxGetObjectHandle(clientID, "Junta_03", out Junta3, simx_opmode.oneshot_wait);
@@ -278,7 +277,6 @@ namespace RoboticArm
                    pictureBox1.Image = bmp1;
 
                 }
-
 
                 if (Wrapper.simxGetVisionSensorImage(clientID, VisionsensorC, out resolution[0], out image2, '0', simx_opmode.streaming) == 0)
                 {
@@ -430,7 +428,7 @@ namespace RoboticArm
             return jointPosition;
         }
 
-        //evento acionado quando o usuário interage com o TrackBa
+        //evento acionado quando o usuário interage com o TrackBar
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
             int trackBar3Value = trackBar3.Value;
@@ -986,9 +984,19 @@ namespace RoboticArm
         //envia sinal para Coppelia chamar sinal de Loop
         private void button13_Click(object sender, EventArgs e)
         {
+         
+
             Wrapper.simxSetIntegerSignal(clientID, "Loop_sinal", 1, simx_opmode.oneshot);
 
             Wrapper.simxSynchronousTrigger(clientID);
+            if (button13.Text == "Exit Continuous")
+            {
+                button13.Text = "Continuous";
+            }
+            else
+            {
+                button13.Text = "Exit Continuous";
+            }
 
         }
 
@@ -1006,7 +1014,7 @@ namespace RoboticArm
                          + "- Realiza o movimento uma única vez e para.\n\n"
 
                          + "4. Botão Continuous:\n"
-                         + "- Realizar o movimento determinado repetidas vezes.\n\n"
+                         + "- Realiza o movimento determinado repetidas vezes. Apertar novamente para pausar.\n\n"
 
                          + "5. Botão Teach:\n"
                         + "- Guarda na tabela a posição atual de acordo com a posição das juntas que foram ajustadas manualmente, desde que dentro do espaço de trabalho.\n"
@@ -1072,7 +1080,7 @@ namespace RoboticArm
             {
                 y[i] = (0.5f + ((0.1f) / 6)) - (0.01f * (0.5f + ((0.1f) / 6))); 
                 //calcula proximo y, que será dado pelo y anterior + o comprimento do bloco (0.1) dividido por 2n, onde n é a posição do bloco na pilha (neste caso, 3)
-                //a segunda parte é para fornecer uma tolerância de 1% no valor calculado. Sem essa tolerância os blocos caem rapidamente devido às vibrações que alteram a posição dos mesmos.
+                //a segunda parte é para fornecer uma tolerância de 1% no valor calculado. Sem essa tolerância os blocos caem rapidamente.
             }
             else if (i == 12 || i == 13 || i == 15)
             {
