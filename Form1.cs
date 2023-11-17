@@ -116,7 +116,7 @@ namespace RoboticArm
             // Verifica se conexão foi bem-sucedida
             if (clientID != -1)
             {
-                label3.Text = "CONECTADO AO V-REP";
+                label3.Text = "CONECTADO AO COPPELIASIM";
             }
             else
             {
